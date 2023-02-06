@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un livre</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <?php require_once "includes/partials/navbar.phtml"; ?>
+        </nav>
+        
+        <!--Formulaire d'ajout d'un nouveau livre-->
+        <form action="" method="post">
+            
+            
+        <!--Langue-->
+        <select name="langue" id="langue">
+            <option value="0">--Selectionner--</option>
+                <?php
+                    foreach($langues as $langue){
+                        print('<option value="'.$langue->getId().'">"'.$langue->getLibelle().'"</option>');
+                    }
+                ?>
+        </select>
+            <input type="submit" value="Submit"/>
+        </form>
+    </main>
+</body>
+</html>
+
+    

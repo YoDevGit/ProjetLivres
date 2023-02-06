@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des livres</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <?php require_once "includes/partials/navbar.phtml"; ?>
+        </nav>
+        <header>
+            <h1>Titre de ma page d'accueil</h1>
+        </header>
+        <a href="index.php?page=livre&action=add">Ajouter un livre</a>
+        <table>
+            <thead>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Date</th>
+                <th>Prix</th>
+                <th colspan="2">Actions</th>
+            </thead>
+            <tbody>
+                <?php
+                    foreach($livres as $livre){
+                        $script= " ";
+                        $script.= ('<tr>');
+                        $script.= ('<td>').$livre->getTitre().('</td>');
+                        $script.= ('<td>').$livre->getAuteur().('</td>');
+                        $script.= ('<td>').$livre->getTitre().('</td>');
+                        $script.= ('<td>').$livre->getDateParution()->format('d/m/Y').('</td>');
+                        $script.= ('<td>').$livre->getPrix().('</td>');
+                        $script .= ('<td><a href="index.php?page=contact&action=edit&id='.$livre->getId().'">Modifier</a></td>');
+                        $script .= ('<td><a href="index.php?page=contact&action=delete&id='.$livre->getId().'">Supprimer</a></td>');
+                        $script.= ('</tr>');
+                        
+                        print($script);
+                    }
+                ?>
+            </tbody>
+        </table>
+        <footer>
+            <?php require_once "includes/partials/footer.phtml"; ?>
+        </footer>
+    </main>
+</body>
+</html>
