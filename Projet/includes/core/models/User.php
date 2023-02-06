@@ -4,16 +4,24 @@
     
     class User{
         private int $id;
-        private string $pseudo, $email, $password, $avatar;
+        private string $avatar, $pseudo, $email, $password, $role;
         
-        public function __construct(string $pseudo, string $email, string $password, string $avatar){
+        public function __construct(string $avatar, string $pseudo, string $email, string $password, string $role){
+            $this->avatar = $avatar;
             $this->pseudo = $pseudo;
             $this->email = $email;
             $this->password = $password;
-            $this->avatar = $avatar;
+            $this->role = $role;
             $this->id = 0;
         }
         
+         //Avatar
+        public function getAvatar(): string{
+            return $this->avatar;
+        }
+        public function setAvatar($avatar): void{
+            $this->avatar = $avatar;
+        }
         //Pseudo
         public function getPseudo(): string{
             return $this->pseudo;
@@ -35,11 +43,11 @@
         public function setPassword($password): void{
             $this->password = $password;
         }
-        //Avatar
-        public function getAvatar(): string{
-            return $this->avatar;
+        //Role
+        public function getRole(): string{
+            return $this->role;
         }
-        public function setAvatar($avatar): void{
-            $this->avatar = $avatar;
+        public function setRole($role): void{
+            $this->role = $role;
         }
     }

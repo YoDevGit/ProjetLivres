@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="public/styles/style.css" type="text/css"/>
+    <title>Liste des utilisateurs</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <?php require_once "includes/partials/navbar.phtml"; ?>
+        </nav>
+        <header>
+            <h1>Titre de ma page d'accueil</h1>
+        </header>
+        <a href="index.php?page=user&action=add">Ajouter un utilisateur</a>
+        <table>
+            <thead>
+                <th>Avatar</th>
+                <th>Pseudo</th>
+                <th>Mail</th>
+                <th>Role</th>
+                <th colspan="2">Actions</th>
+            </thead>
+            <tbody>
+                <?php
+                    foreach($users as $user){
+                        $script= " ";
+                        $script.= ('<tr>');
+                        $script.= ('<td>').$user->getAvatar().('</td>');
+                        $script.= ('<td>').$user->getPseudo().('</td>');
+                        $script.= ('<td>').$user->getEmail().('</td>');
+                        // $script.= ('<td>').$user->getPassword().('</td>');
+                        $script.= ('<td>').$user->getRole().('</td>');
+                        $script .= ('<td><a href="index.php?page=user&action=edit&id='.$user->getId().'">Modifier</a></td>');
+                        $script .= ('<td><a href="index.php?page=user&action=delete&id='.$user->getId().'">Supprimer</a></td>');
+                        $script.= ('</tr>');
+                        
+                        print($script);
+                    }
+                ?>
+            </tbody>
+        </table>
+        <footer>
+            <?php require_once "includes/partials/footer.phtml"; ?>
+        </footer>
+    </main>
+</body>
+</html>

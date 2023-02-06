@@ -17,8 +17,14 @@
         public function __construct(string $titre = "", string $couverture = "", ?Auteur $auteur = null, ?Editeur $editeur = null, 
             int $nbPages = null, ?DateTime $dateParution = null, int $prix = null, string $resume = "", string $avis = ""){
             $this->titre = $titre;
+            $this->couverture = $couverture;
             $this->auteur = $auteur;
             $this->editeur = $editeur;
+            $this->nbPages = $nbPages;
+            $this->dateParution = $dateParution;
+            $this->prix = $prix;
+            $this->resume = $resume;
+            $this->avis = $avis;
             $this->id = 0;
         }
         

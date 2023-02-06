@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="public/styles/style.css" type="text/css"/>
+    <title>Ajouter un livre</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <?php require_once "includes/partials/navbar.phtml"; ?>
+        </nav>
+        
+        <!--Formulaire d'ajout d'un nouveau livre-->
+        <form action="" method="post">
+            <!--Couverture-->
+            <div>
+                <label for=""></label>
+                <input type="text" name="chCouverture" id="champCouverture" value="<?= $unLivre->getCouverture() ?>"/>
+            </div>
+            <!--Titre-->
+            <div>
+                <label for="">Titre : </label>
+                <input type="text" name="chTitre" id="champTitre" value="<?= $unLivre->getTitre() ?>"/>
+            </div>
+            <!--Auteur-->
+            <div>
+                <label for="">Auteur : </label>
+                <input type="text" name="chAuteur" id="champAuteur" value="<?= $unLivre->getAuteur() ?>"/>
+            </div>
+            <!--Edition-->
+            <div>
+                <label for="">Edition : </label>
+                <input type="text" name="chEdition" id="champEdition" value="<?= $unLivre->getEdition() ?>"/>
+            </div>
+            <!--Nb Pages-->
+            <div>
+                <label for="">Nombre de pages : </label>
+                <input type="text" name="chNbPages" id="champNbPages" value="<?= $unLivre->getNbPages() ?>"/>
+            </div>
+            <!--Date Parution-->
+            <div>
+                <label for="">Date de parution : </label>
+                <input type="date" name="chDateParution" id="champDateParution" value="<?= $unLivre->getDateParution->format('d/m/Y') ?>"/>
+            </div>
+            <!--Prix-->
+             <div>
+                <label for="">Prix : </label>
+                <input type="text" name="chPrix" id="champPrix" value="<?= $unLivre->getPrix() ?>"/>
+            </div>
+            <!--Langue-->
+            <div>
+                <label for="">Langue : </label>
+                <select name="chLangue" id="champLangue">
+                    <option value="0">--Selectionner--</option>
+                        <?php
+                            foreach($langues as $langue){
+                                print('<option value="'.$langue->getId().'">"'.$langue->getLibelle().'"</option>');
+                            }
+                        ?>
+                </select>
+            </div>
+            <!--Resume-->
+            <div>
+                <label for="">Resume : </label>
+                <input type="text" name="chResume" id="champResume" value="<?= $unLivre->getResume() ?>"/>
+            </div>
+            <!--Avis-->
+            <div>
+                <label for="">Avis : </label>
+                <input type="text" name="chAvis" id="champAvis" value=""/>
+            </div>
+        
+            <input type="submit" value="Submit"/>
+        </form>
+    </main>
+</body>
+</html>
+
+    
