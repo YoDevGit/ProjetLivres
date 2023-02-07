@@ -17,6 +17,6 @@
             break;
         }
         default:{
-            require_once("includes/core/controllers/controller_error.php"); // si l'on souhaite afficher une erreur 404
+            require_once("includes/core/controllers/controller_error.php"); // si l'on souhaite afficher une erreur 404 par exemple
         }
     }

@@ -12,44 +12,61 @@
         </nav>
         
         <!--Formulaire d'ajout d'un nouveau livre-->
-        <form action="" method="post">
+        <form class="form_livre" action="" method="post" enctype ="multipart/form-data">
             <!--Couverture-->
-            <div>
-                <label for=""></label>
-                <input type="text" name="chCouverture" id="champCouverture" value="<?= $unLivre->getCouverture() ?>"/>
+            <div class="champs">
+                <label for="">Couverture : </label>
+                <input type="file" name="chCouverture" id="champCouverture" value="<?= $unLivre->getCouverture() ?>"/>
             </div>
             <!--Titre-->
-            <div>
+            <div class="champs">
                 <label for="">Titre : </label>
                 <input type="text" name="chTitre" id="champTitre" value="<?= $unLivre->getTitre() ?>"/>
             </div>
             <!--Auteur-->
-            <div>
+            <div class="champs">
                 <label for="">Auteur : </label>
                 <input type="text" name="chAuteur" id="champAuteur" value="<?= $unLivre->getAuteur() ?>"/>
             </div>
             <!--Edition-->
-            <div>
+            <div class="champs">
                 <label for="">Edition : </label>
-                <input type="text" name="chEdition" id="champEdition" value="<?= $unLivre->getEdition() ?>"/>
+                <input type="text" name="chEdition" id="champEdition" value="<?= $unLivre->getEditeur() ?>"/>
+            </div>
+            <!--Genre-->
+            <div class="champs">
+                <label for="">Genre : </label>
+                <select name="chGenre" id="champGenre">
+                    <option value="0">--Selectionner--</option>
+                        <?php
+                            foreach($genres as $genre){
+                                print('<option value="'.$genre->getId().'">"'.$genre->getLibelle().'"</option>');
+                            }
+                        ?>
+                </select>
+            </div>
+            <!--Format-->
+            <div class="champs">
+                <label for="">Format : </label>
+                <input type="text" name="chFormat" id="champFormat" value="<?= $unLivre->getFormat() ?>"/>
             </div>
             <!--Nb Pages-->
-            <div>
+            <div class="champs">
                 <label for="">Nombre de pages : </label>
                 <input type="text" name="chNbPages" id="champNbPages" value="<?= $unLivre->getNbPages() ?>"/>
             </div>
             <!--Date Parution-->
-            <div>
+            <div class="champs">
                 <label for="">Date de parution : </label>
-                <input type="date" name="chDateParution" id="champDateParution" value="<?= $unLivre->getDateParution->format('d/m/Y') ?>"/>
+                <input type="date" name="chDateParution" id="champDateParution" value="<?= $unLivre->getDateParution() ?>"/>
             </div>
             <!--Prix-->
-             <div>
+             <div class="champs">
                 <label for="">Prix : </label>
-                <input type="text" name="chPrix" id="champPrix" value="<?= $unLivre->getPrix() ?>"/>
+                <input type="text" name="chPrix" id="champPrix" value="<?= $unLivre->getPrix() ?>"/> &euro;
             </div>
             <!--Langue-->
-            <div>
+            <div class="champs">
                 <label for="">Langue : </label>
                 <select name="chLangue" id="champLangue">
                     <option value="0">--Selectionner--</option>
@@ -61,12 +78,12 @@
                 </select>
             </div>
             <!--Resume-->
-            <div>
+            <div class="champs">
                 <label for="">Resume : </label>
                 <input type="text" name="chResume" id="champResume" value="<?= $unLivre->getResume() ?>"/>
             </div>
             <!--Avis-->
-            <div>
+            <div class="champs">
                 <label for="">Avis : </label>
                 <input type="text" name="chAvis" id="champAvis" value=""/>
             </div>

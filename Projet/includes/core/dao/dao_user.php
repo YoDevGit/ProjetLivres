@@ -10,29 +10,29 @@
         $SQLStmt = $conn->prepare($SQLQuery);
         $SQLStmt->execute();
         
-        $listeUsers = array();
+        $listUsers = array();
         
         while ($SQLRow = $SQLStmt->fetch(PDO::FETCH_ASSOC)){
             $user = new User($SQLRow['pseudo'], $SQLRow['mail']);
             $user->setId($SQLRow['id']);
-            $listeUsers[] = $user;
+            $listUsers[] = $user;
         }
         $SQLStmt->closeCursor();
-        return $listeUsers;
+        return $listUsers;
     }
     
-    function getUserById(int $id): User{
-        $conn = getConnection();
+    // function getUserById(int $id): User{
+    //     $conn = getConnection();
         
-        $SQLQuery = "SELECT * FROM Utilisateurs WHERE id = :id";
-        $SQLStmt = $conn->prepare($SQLQuery);
-        $SQLStmt->bindvalue(':id', $id, PDO::PARAM_INT);
-        $SQLStmt->execute;
+    //     $SQLQuery = "SELECT * FROM Utilisateurs WHERE id = :id";
+    //     $SQLStmt = $conn->prepare($SQLQuery);
+    //     $SQLStmt->bindvalue(':id', $id, PDO::PARAM_INT);
+    //     $SQLStmt->execute;
         
-        $SQLRow = $SQLStmt->fetch(PDO::FETCH_ASSOC);
-        $user = new User($SQLRow['pseudo'], $SQLRow['mail']);
-        $user->setId($SQLRow['id']);
+    //     $SQLRow = $SQLStmt->fetch(PDO::FETCH_ASSOC);
+    //     $user = new User($SQLRow['pseudo'], $SQLRow['mail']);
+    //     $user->setId($SQLRow['id']);
         
-        $SQLStmt->closeCursor();
-        return $user;
-    }
+    //     $SQLStmt->closeCursor();
+    //     return $user;
+    // }

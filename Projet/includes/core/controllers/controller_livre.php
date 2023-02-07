@@ -17,15 +17,30 @@
                 $unLivre = new Livre();
             }
             else{
+                
+                // récupérer le chemin temporaire du fichier uploadé
+                $tmpPath = $_FILES['chCouverture']['tmp_name'];
+                $destPath = 'public/medias/couvertures';
+                $destFileName = $_FILES['chCouverture']['name'];
+                
+                $fullDestName = $destPath.$destFileName;
+                
+                if (!move_uploaded_file($tmpPath, $fullDestName)){
+                    die("Erreur Upload");
+                }
+                
+                var_dump ($_FILES);
                 $unLivre = new Livre(
-                    $_POST['chCouverture'],
+                    $fullDestName,
                     $_POST['chTitre'],
-                    $_POST['chAuteur'],
-                    $_POST['chEdition'],
+                    new Auteur($_POST['chAuteur']),
+                    new Editeur($_POST['chEdition']),
+                    new Format($_POST['chFormat']),
+                    new Genre($_POST['chGenre']),
                     $_POST['chNbPages'],
                     date_create($_POST['chDateParution']),
+                    new Langue($_POST['chLangue']),
                     $_POST['chPrix'],
-                    $_POST['chLangue'],
                     $_POST['chResume'],
                     $_POST['chAvis']
                 );
@@ -38,9 +53,17 @@
                 }
             }
             
+            // require_once "includes/core/dao/dao_langue.php";
+            // $lesLangues = getAllLangues();
             require_once "includes/core/dao/dao_livre.php";
             $lesLivres = getAllLivres();
             require_once "includes/core/views/form_livre.phtml";
             break;
         }
+        // case 'edit' :{
+            
+        // }
+        // case 'delete' :{
+            
+        // }
     }

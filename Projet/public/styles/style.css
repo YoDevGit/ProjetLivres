@@ -1,5 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+/*Templates*/
+.flex{
+    display: flex;
+}
+.between{
+    justify-content: space-between;
+}
+.evenly{
+    justify-content: space-evenly;
+}
+.center{
+    align-items: center;
+}
+/*/////////*/
+
 .navbar{
     width: 100%;
-    height: 3em;
-    background-color: grey;
+    height: 5em;
+    background-color: #3d3d3d;
+    font-size: 1.5em;
+}
+.navbar ul{
+    justify-content: space-between;
+}
+.navbar ul li{
+    list-style: none;
+}
+.navbar a{
+    color: white;
+    justify-content: space-between;
+    padding: .3em;
+}
+
+.form_livre{
+    padding: 1em;
+}
+.champs{
+    padding: .3em;
 }

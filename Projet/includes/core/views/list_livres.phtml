@@ -27,9 +27,10 @@
                     foreach($livres as $livre){
                         $script= " ";
                         $script.= ('<tr>');
+                        $script.= ('<td>').$livre->getCouverture().('</td>');
                         $script.= ('<td>').$livre->getTitre().('</td>');
                         $script.= ('<td>').$livre->getAuteur().('</td>');
-                        $script.= ('<td>').$livre->getTitre().('</td>');
+                        $script.= ('<td>').$livre->getEditeur().('</td>');
                         $script.= ('<td>').$livre->getDateParution()->format('d/m/Y').('</td>');
                         $script.= ('<td>').$livre->getPrix().('</td>');
                         $script .= ('<td><a href="index.php?page=contact&action=edit&id='.$livre->getId().'">Modifier</a></td>');
