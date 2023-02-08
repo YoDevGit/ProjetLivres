@@ -8,26 +8,26 @@
     require_once 'Pal.php';
 
     class Livre{
-        private int $id, $nbPages, $prix;
-        private string $titre, $couverture, $resume, $numIsbn, $avis;
+        private int $id, $nbPages, $prix, $numIsbn;
+        private string $titre, $couverture, $resume, $avis;
         private ?DateTime $dateParution;
-        private ?Auteur $auteur;
         private ?Editeur $editeur;
         private ?Format $format;
         private ?Genre $genre;
         private ?Langue $langue;
         
-        public function __construct(string $couverture = "", string $titre = "", ?Auteur $auteur = null, ?Editeur $editeur = null, ?Format $format = null, 
-            ?Genre $genre = null, int $nbPages = 0, ?DateTime $dateParution = null, ?Langue $langue = null, int $prix = 0, string $resume = "", string $avis = ""){
+        public function __construct(string $couverture = "", string $titre = "", ?Editeur $editeur = null, ?Format $format = null, 
+            ?Genre $genre = null, int $nbPages = 0, ?DateTime $dateParution = null, ?Langue $langue = null, int $prix = 0, int $numIsbn = 0, string $resume = "", string $avis = ""){
             $this->titre = $titre;
             $this->couverture = $couverture;
-            $this->auteur = $auteur;
             $this->editeur = $editeur;
             $this->nbPages = $nbPages;
             $this->genre = $genre;
             $this->format = $format;
             $this->dateParution = $dateParution;
+            $this->langue = $langue;
             $this->prix = $prix;
+            $this->numIsbn = $numIsbn;
             $this->resume = $resume;
             $this->avis = $avis;
             $this->id = 0;
@@ -37,56 +37,56 @@
         public function getId(): int{
             return $this->id;
         }
-        public function setId($id): void{
+        public function setId(int $id): void{
             $this->id = $id;
         }
         //Titre
         public function getTitre(): string{
             return $this->titre;
         }
-        public function setTitre($titre): void{
+        public function setTitre(string $titre): void{
             $this->titre = $titre;
         }
         //Couverture
         public function getCouverture(): string{
             return $this->couverture;
         }
-        public function setCouverture($couverture): void{
+        public function setCouverture(string $couverture): void{
             $this->couverture = $couverture;
         }
         //Auteur
-        public function getAuteur(): ?Auteur{
-            return $this->auteur;
-        }
-        public function setAuteur($auteur): void{
-            $this->auteur = $auteur;
-        }
+        // public function getAuteur(): ?Auteur{
+        //     return $this->auteur;
+        // }
+        // public function setAuteur($auteur): void{
+        //     $this->auteur = $auteur;
+        // }
         //Editeur
         public function getEditeur(): ?Editeur{
             return $this->editeur;
         }
-        public function setEditeur($editeur): void{
+        public function setEditeur(string $editeur): void{
             $this->editeur = $editeur;
         }
         //Genre
         public function getGenre(): ?Genre{
             return $this->genre;
         }
-        public function setGenre($genre): void{
+        public function setGenre(string $genre): void{
             $this->genre = $genre;
         }
         //Format
         public function getFormat(): ?Format{
             return $this->format;
         }
-        public function setFormat($format): void{
+        public function setFormat(string $format): void{
             $this->format = $format;
         }
         //Nombre pages
         public function getNbPages(): int{
             return $this->nbPages;
         }
-        public function setNbPages($nbPages): void{
+        public function setNbPages(int $nbPages): void{
             $this->nbPages = $nbPages;
         }
         //Date parution
@@ -100,28 +100,35 @@
         public function getLangue(): ?Langue{
             return $this->langue;
         }
-        public function setLangue($langue): void{
+        public function setLangue(string $langue): void{
             $this->langue = $langue;
         }
         //Prix
         public function getPrix(): int{
             return $this->prix;
         }
-        public function setPrix($prix): void{
+        public function setPrix(int $prix): void{
             $this->prix = $prix;
+        }
+        // Num Isbn
+        public function getNumIsbn(): int{
+            return $this->numIsbn;
+        }
+        public function setNumIsbn(int $numIsbn){
+            $this->numIsbn = $numIsbn;
         }
         //Resume
         public function getResume(): string{
             return $this->resume;
         }
-        public function setResume($resume): void{
+        public function setResume(string $resume): void{
             $this->resume = $resume;
         }
         //Avis
         public function getAvis(): string{
             return $this->avis;
         }
-        public function setAvis($avis):void{
+        public function setAvis(string $avis):void{
             $this->avis = $avis;
         }
     }

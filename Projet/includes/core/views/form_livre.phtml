@@ -1,3 +1,7 @@
+<?php
+    require_once "includes/core/dao/dao_langue.php";
+?>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -23,15 +27,13 @@
                 <label for="">Titre : </label>
                 <input type="text" name="chTitre" id="champTitre" value="<?= $unLivre->getTitre() ?>"/>
             </div>
-            <!--Auteur-->
-            <div class="champs">
-                <label for="">Auteur : </label>
-                <input type="text" name="chAuteur" id="champAuteur" value="<?= $unLivre->getAuteur() ?>"/>
-            </div>
             <!--Edition-->
             <div class="champs">
                 <label for="">Edition : </label>
-                <input type="text" name="chEdition" id="champEdition" value="<?= $unLivre->getEditeur() ?>"/>
+                <input list="editeurs" name="chEdition" id="champEdition"/>
+                <datalist id="editeurs">
+                    <option value="<?= $unLivre->getEditeur() ?>"></option>
+                </datalist>
             </div>
             <!--Genre-->
             <div class="champs">
@@ -65,14 +67,19 @@
                 <label for="">Prix : </label>
                 <input type="text" name="chPrix" id="champPrix" value="<?= $unLivre->getPrix() ?>"/> &euro;
             </div>
+            <!--ISBN-->
+             <div class="champs">
+                <label for="">ISBN : </label>
+                <input type="text" name="chIsbn" id="champIsbn" value="<?= $unLivre->getNumIsbn() ?>"/> 
+            </div>
             <!--Langue-->
             <div class="champs">
                 <label for="">Langue : </label>
                 <select name="chLangue" id="champLangue">
                     <option value="0">--Selectionner--</option>
                         <?php
-                            foreach($langues as $langue){
-                                print('<option value="'.$langue->getId().'">"'.$langue->getLibelle().'"</option>');
+                            foreach($lesLangues as $langue){
+                                print('<option value="'.$langue->getId().'">'.$langue->getLibelle().'</option>');
                             }
                         ?>
                 </select>

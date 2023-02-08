@@ -1,22 +1,23 @@
 <?php
 
-    // function getAllLangues(){
-    //     $conn = getConnexion();
+    function getAllLangues(){
+        $conn = getConnexion();
         
-    //     $SQLQuery = "SELECT * FROM Langue";
+        $SQLQuery = "SELECT * FROM Langue";
         
-    //     $SQLStmt = $conn->prepare($SQLQuery);
-    //     $SQLStmt->execute();
+        $SQLStmt = $conn->prepare($SQLQuery);
+        $SQLStmt->execute();
         
-    //     $listeLangues = array();
+        $listeLangues = array();
         
-    //     while ($SQLRow = $SQLStmt->fetch(PDO::FETCH_ASSOC)){
-    //         $uneLangue = new Langue($SQLRow['libelle']);
+        while ($SQLRow = $SQLStmt->fetch(PDO::FETCH_ASSOC)){
+            $uneLangue = new Langue($SQLRow['libelle']);
             
-    //         $uneLangue->setId($SQLRow['id']);
-    //     }
+            $uneLangue->setId($SQLRow['id_langue']);
+            $listeLangues[] = $uneLangue;
+        }
         
-    //     $SQLStmt->closeCursor();
-    //     return $listeLangues;
-    // }
+        $SQLStmt->closeCursor();
+        return $listeLangues;
+    }
     
