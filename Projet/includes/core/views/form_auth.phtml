@@ -1,0 +1,40 @@
+<?php
+
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="public/styles/style.css" type="text/css"/>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+         <nav>
+            <?php require_once "includes/partials/navbar.phtml"; ?>
+        </nav>
+    </header>
+    <main>
+        <form action="" method="post">
+            <div class="champs">
+                <label for="chLogin">Nom : </label>
+                <input type="text" name="champLogin" id="chLogin" value=""/>
+            </div>
+            <div class="champs">
+                <label for="chMdp">Mot de passe : </label>
+                <input type="password" name="champMdp" id="chMdp" value=""/>
+            </div>
+            <div class="champs">
+                <button type="submit">Connexion</button>
+                <button type="reset">Réinitialiser</button>
+            </div>
+            
+        </form>
+        <?= $message ?? '' ?>
+        <footer>
+            <?php require_once "includes/partials/footer.phtml"; ?>
+        </footer>
+    </main>
+</body>
+</html>

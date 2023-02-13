@@ -1,7 +1,7 @@
 <?php
 
  class Format{
-    private int $id;
+    private int $id_format;
     private string $libelle;
      
     public function __construct(string $libelle){
@@ -12,8 +12,8 @@
     public function getId(): int{
         return $this->id;
     }
-    public function setId(int $id): void{
-        $this->id = $id;
+    public function setId(int $id_format): void{
+        $this->id = $id_format;
     }
     public function getLibelle(): string{
         return $this->libelle;

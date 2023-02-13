@@ -4,12 +4,11 @@
 
     class Auteur{
         private int $id;
-        private string $nom, $prenom, $nationalite;
+        private string $nom, $prenom;
         
-        public function __construct(string $nom = "", string $prenom = "", string $nationalite = ""){
+        public function __construct(string $nom = "", string $prenom = ""){
             $this->nom = $nom;
             $this->prenom = $prenom;
-            $this->nationalite = $nationalite;
             $this->id = 0;
         }
         
@@ -31,11 +30,5 @@
         }
         public function setPrenom(string $prenom): void{
             $this->prenom = $prenom;
-        }
-        public function getNationalite(): string{
-            return $this->nationalite;
-        }
-        public function setNationalite(string $nationalite): void{
-            $this->nationalite = $nationalite;
         }
     }

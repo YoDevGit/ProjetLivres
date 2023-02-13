@@ -1,5 +1,8 @@
 <?php
     require_once "includes/core/dao/dao_langue.php";
+    require_once "includes/core/dao/dao_editeur.php";
+    require_once "includes/core/dao/dao_format.php";
+    require_once "includes/core/dao/dao_genre.php";
 ?>
 
 <!doctype html>
@@ -10,93 +13,111 @@
     <title>Ajouter un livre</title>
 </head>
 <body>
-    <main>
-        <nav>
+    <header>
+         <nav>
             <?php require_once "includes/partials/navbar.phtml"; ?>
         </nav>
+    </header>
+    <main class="flex align-center">
         
         <!--Formulaire d'ajout d'un nouveau livre-->
-        <form class="form_livre" action="" method="post" enctype ="multipart/form-data">
-            <!--Couverture-->
-            <div class="champs">
-                <label for="">Couverture : </label>
-                <input type="file" name="chCouverture" id="champCouverture" value="<?= $unLivre->getCouverture() ?>"/>
-            </div>
-            <!--Titre-->
-            <div class="champs">
-                <label for="">Titre : </label>
-                <input type="text" name="chTitre" id="champTitre" value="<?= $unLivre->getTitre() ?>"/>
-            </div>
-            <!--Edition-->
-            <div class="champs">
-                <label for="">Edition : </label>
-                <input list="editeurs" name="chEdition" id="champEdition"/>
-                <datalist id="editeurs">
-                    <option value="<?= $unLivre->getEditeur() ?>"></option>
-                </datalist>
-            </div>
-            <!--Genre-->
-            <div class="champs">
-                <label for="">Genre : </label>
-                <select name="chGenre" id="champGenre">
-                    <option value="0">--Selectionner--</option>
+        <div class="form_livre flex align">
+            <form class="form_content flex" action="" method="post" enctype ="multipart/form-data">
+                <!--Couverture-->
+                <div class="champs">
+                    <label for="">Couverture : </label>
+                    <input type="file" name="chCouverture" id="champCouverture" value="<?= $unLivre->getCouverture() ?>"/>
+                </div>
+                <!--Titre-->
+                <div class="champs">
+                    <label for="">Titre : </label>
+                    <input type="text" name="chTitre" id="champTitre" value="<?= $unLivre->getTitre() ?>"/>
+                </div>
+                <!--Auteur-->
+                <!--Edition-->
+                <div class="champs">
+                    <label for="">Édition : </label>
+                    <input list="editeurs" name="chEdition" id="champEdition"/>
+                    <datalist id="editeurs">
                         <?php
-                            foreach($genres as $genre){
-                                print('<option value="'.$genre->getId().'">"'.$genre->getLibelle().'"</option>');
+                            foreach($lesEditeurs as $editeur){
+                                print('<option value="'.$editeur->getNom().'">');
                             }
                         ?>
-                </select>
-            </div>
-            <!--Format-->
-            <div class="champs">
-                <label for="">Format : </label>
-                <input type="text" name="chFormat" id="champFormat" value="<?= $unLivre->getFormat() ?>"/>
-            </div>
-            <!--Nb Pages-->
-            <div class="champs">
-                <label for="">Nombre de pages : </label>
-                <input type="text" name="chNbPages" id="champNbPages" value="<?= $unLivre->getNbPages() ?>"/>
-            </div>
-            <!--Date Parution-->
-            <div class="champs">
-                <label for="">Date de parution : </label>
-                <input type="date" name="chDateParution" id="champDateParution" value="<?= $unLivre->getDateParution() ?>"/>
-            </div>
-            <!--Prix-->
-             <div class="champs">
-                <label for="">Prix : </label>
-                <input type="text" name="chPrix" id="champPrix" value="<?= $unLivre->getPrix() ?>"/> &euro;
-            </div>
-            <!--ISBN-->
-             <div class="champs">
-                <label for="">ISBN : </label>
-                <input type="text" name="chIsbn" id="champIsbn" value="<?= $unLivre->getNumIsbn() ?>"/> 
-            </div>
-            <!--Langue-->
-            <div class="champs">
-                <label for="">Langue : </label>
-                <select name="chLangue" id="champLangue">
-                    <option value="0">--Selectionner--</option>
+                    </datalist>
+                    <a href="?page=editeur&action=add">ajouter</a>
+                </div>
+                <!--Genre-->
+                <div class="champs">
+                    <label for="">Genre : </label>
+                    <input list="genres" name="chGenre" id="champGenre" pattern="<?= $patternGenres ?>"/>
+                    <datalist id="genres">
                         <?php
-                            foreach($lesLangues as $langue){
-                                print('<option value="'.$langue->getId().'">'.$langue->getLibelle().'</option>');
+                            foreach($lesGenres as $genre){
+                                print('<option value="'.$genre->getLibelle().'">');
                             }
                         ?>
-                </select>
-            </div>
-            <!--Resume-->
-            <div class="champs">
-                <label for="">Resume : </label>
-                <input type="text" name="chResume" id="champResume" value="<?= $unLivre->getResume() ?>"/>
-            </div>
-            <!--Avis-->
-            <div class="champs">
-                <label for="">Avis : </label>
-                <input type="text" name="chAvis" id="champAvis" value=""/>
-            </div>
-        
-            <input type="submit" value="Submit"/>
-        </form>
+                    </datalist>
+                    <a href="?page=genre&action=add">ajouter</a>
+                </div>
+                <!--Format-->
+                <div class="champs">
+                    <label for="">Format : </label>
+                    <input list="formats" name="chFormat" id="champFormat" pattern = "<?= $patternFormats ?>"/>
+                    <datalist id="formats">
+                        <?php
+                            foreach($listeFormats as $format){
+                                print('<option value="'.$format->getLibelle().'">');
+                            }
+                        ?>
+                    </datalist>
+                </div>
+                <!--Nb Pages-->
+                <div class="champs">
+                    <label for="">Nombre de pages : </label>
+                    <input type="text" name="chNbPages" id="champNbPages" value="<?= $unLivre->getNbPages() ?>"/>
+                </div>
+                <!--Date Parution-->
+                <div class="champs">
+                    <label for="">Date de parution : </label>
+                    <input type="date" name="chDateParution" id="champDateParution" value="<?= $unLivre->getDateParution() ?>"/>
+                </div>
+                <!--Prix-->
+                 <div class="champs">
+                    <label for="">Prix : </label>
+                    <input type="text" name="chPrix" id="champPrix" value="<?= $unLivre->getPrix() ?>"/> &euro;
+                </div>
+                <!--ISBN-->
+                 <div class="champs">
+                    <label for="">ISBN : </label>
+                    <input type="text" name="chIsbn" id="champIsbn" value="<?= $unLivre->getNumIsbn() ?>"/> 
+                </div>
+                <!--Langue-->
+                <div class="champs">
+                    <label for="">Langue : </label>
+                    <select name="chLangue" id="champLangue">
+                        <option value="0">--Sélectionner--</option>
+                            <?php
+                                foreach($lesLangues as $langue){
+                                    print('<option value="'.$langue->getId().'">'.$langue->getLibelle().'</option>');
+                                }
+                            ?>
+                    </select>
+                </div>
+                <!--Resume-->
+                <div class="champs flex align">
+                    <label for="">Résumé : </label>
+                    <textarea name="chResume" id="champResume" value="<?= $unLivre->getResume() ?>"></textarea>
+                </div>
+                <!--Avis-->
+                <div class="champs flex align-center">
+                    <label for="">Avis : </label>
+                    <textarea name="chAvis" id="champAvis" value=""></textarea>
+                </div>
+            
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
     </main>
 </body>
 </html>

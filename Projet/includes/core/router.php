@@ -16,6 +16,10 @@
             require_once("includes/core/controllers/controller_user.php");
             break;
         }
+        case 'test' :{
+            require_once("includes/core/controllers/controller_test.php");
+            break;
+        }
         default:{
             require_once("includes/core/controllers/controller_error.php"); // si l'on souhaite afficher une erreur 404 par exemple
         }

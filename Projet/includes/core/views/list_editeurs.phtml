@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="public/styles/style.css" type="text/css"/>
+    <title>Liste des editeurs</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <?php require_once "includes/partials/navbar.phtml"; ?>
+        </nav>
+        <header>
+            <h1>Liste des editeurs</h1>
+        </header>
+        <a href="index.php?page=editeur&action=add">Ajouter un editeur</a>
+        <table>
+            <thead>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th colspan="2">Actions</th>
+            </thead>
+            <tbody>
+                <?php
+                    foreach($editeurs as $editeur){
+                        $script= " ";
+                        $script.= ('<tr>');
+                        $script.= ('<td>').$editeur->getNom().('</td>');
+                        $script.= ('<td>').$editeur->getPrenom().('</td>');
+                        $script .= ('<td><a href="index.php?page=editeur&action=edit&id='.$editeur->getId().'">Modifier</a></td>');
+                        $script .= ('<td><a href="index.php?page=editeur&action=delete&id='.$editeur->getId().'">Supprimer</a></td>');
+                        $script.= ('</tr>');
+                        
+                        print($script);
+                    }
+                ?>
+            </tbody>
+        </table>
+        <footer>
+            <?php require_once "includes/partials/footer.phtml"; ?>
+        </footer>
+    </main>
+</body>
+</html>

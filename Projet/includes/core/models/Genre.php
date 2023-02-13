@@ -1,7 +1,7 @@
 <?php
 
     class Genre{
-        private int $id;
+        private int $id_genre;
         private string $libelle;
         
         public function __construct(string $libelle){
@@ -13,8 +13,8 @@
         public function getId(): int{
             return $this->id;
         }
-        public function setId(int $id): void{
-            $this->id = $id;
+        public function setId(int $id_genre): void{
+            $this->id = $id_genre;
         }
         //Libelle
         public function getLibelle(): string{

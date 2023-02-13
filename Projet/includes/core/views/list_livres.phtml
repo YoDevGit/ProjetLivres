@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="public/styles/style.css" type="text/css"/>
@@ -16,26 +16,32 @@
         <a href="index.php?page=livre&action=add">Ajouter un livre</a>
         <table>
             <thead>
-                <th>Titre</th>
-                <th>Auteur</th>
-                <th>Date</th>
-                <th>Prix</th>
+                <th class="th">Titre</th>
+                <th class="th">Editeur</th>
+                <th class="th">Genre</th>
+                <th class="th">Format</th>
+                <th class="th">Nb Pages</th>
+                <th class="th">Date</th>
+                <th class="th">Prix</th>
+                <th class="th">Langue</th>
                 <th colspan="2">Actions</th>
             </thead>
             <tbody>
                 <?php
                     foreach($livres as $livre){
                         $script= " ";
-                        $script.= ('<tr>');
-                        $script.= ('<td>').$livre->getCouverture().('</td>');
-                        $script.= ('<td>').$livre->getTitre().('</td>');
-                        $script.= ('<td>').$livre->getAuteur().('</td>');
-                        $script.= ('<td>').$livre->getEditeur().('</td>');
-                        $script.= ('<td>').$livre->getDateParution()->format('d/m/Y').('</td>');
-                        $script.= ('<td>').$livre->getPrix().('</td>');
-                        $script .= ('<td><a href="index.php?page=contact&action=edit&id='.$livre->getId().'">Modifier</a></td>');
-                        $script .= ('<td><a href="index.php?page=contact&action=delete&id='.$livre->getId().'">Supprimer</a></td>');
-                        $script.= ('</tr>');
+                        $script.= '<tr>';
+                        $script.= '<td class="td">'.$livre->getTitre().'</td>';
+                        $script.= '<td class="td">'.$livre->getEditeur()->getNom().'</td>';
+                        $script.= '<td class="td">'.$livre->getGenre()->getLibelle().'</td>';
+                        $script.= '<td class="td">'.$livre->getFormat()->getLibelle().'</td>';
+                        $script.= '<td class="td">'.$livre->getNbPages().'</td>';
+                        $script.= '<td class="td">'.$livre->getDateParution()->format('d/m/Y').'</td>';
+                        $script.= '<td class="td">'.$livre->getPrix().('</td>');
+                        $script.= '<td class="td">'.$livre->getLangue()->getLibelle().'</td>';
+                        $script .= '<td class="td"><a href="index.php?page=livre&action=edit&id='.$livre->getId().'">Modifier</a></td>';
+                        $script .= '<td class="td"><a href="index.php?page=livre&action=delete&id='.$livre->getId().'">Supprimer</a></td>';
+                        $script.= '</tr>';
                         
                         print($script);
                     }

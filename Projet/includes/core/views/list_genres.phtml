@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="public/styles/style.css" type="text/css"/>
+    <title>Liste des genres</title>
+</head>
+<body>
+    <main>
+        <nav>
+            <?php require_once "includes/partials/navbar.phtml"; ?>
+        </nav>
+        <header>
+            <h1>Liste des genres</h1>
+        </header>
+        <a href="index.php?page=genre&action=add">Ajouter un genre</a>
+        <table>
+            <thead>
+                <th>Libelle</th>
+                <th colspan="2">Actions</th>
+            </thead>
+            <tbody>
+                <?php
+                    foreach($genres as $genre){
+                        $script= " ";
+                        $script.= ('<tr>');
+                        $script.= ('<td>').$genre->getLibelle().('</td>');
+                        $script .= ('<td><a href="index.php?page=genre&action=edit&id='.$editeur->getId().'">Modifier</a></td>');
+                        $script .= ('<td><a href="index.php?page=genre&action=delete&id='.$editeur->getId().'">Supprimer</a></td>');
+                        $script.= ('</tr>');
+                        
+                        print($script);
+                    }
+                ?>
+            </tbody>
+        </table>
+        <footer>
+            <?php require_once "includes/partials/footer.phtml"; ?>
+        </footer>
+    </main>
+</body>
+</html>

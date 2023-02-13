@@ -1,7 +1,7 @@
 <?php
 
     class Langue{
-        private int $id;
+        private int $id_langue;
         private string $libelle;
         
         public function __construct(string $libelle){
@@ -11,8 +11,8 @@
         public function getId(): int{
             return $this->id;
         }
-        public function setId(int $id): void{
-            $this->id = $id;
+        public function setId(int $id_langue): void{
+            $this->id = $id_langue;
         }
         public function getLibelle(): string{
             return $this->libelle;

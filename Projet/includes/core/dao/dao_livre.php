@@ -4,6 +4,11 @@
     require_once "includes/core/models/Livre.php";
     require_once "includes/core/models/Auteur.php";
     require_once "includes/core/models/Editeur.php";
+    require_once "includes/core/models/Format.php";
+    require_once "includes/core/dao/dao_editeur.php";
+    require_once "includes/core/dao/dao_format.php";
+    require_once "includes/core/dao/dao_genre.php";
+    require_once "includes/core/dao/dao_langue.php";
     
     function getAllLivres(): array{
         $conn = getConnexion();
@@ -16,39 +21,34 @@
         $listeLivres = array();
         
         while ($SQLRow = $SQLStmt->fetch(PDO::FETCH_ASSOC)){
-            $unLivre = new Livre($SQLRow['couverture'], $SQLRow['titre'], $SQLRow['nbPages'], date_create($SQLRow['dateParution']), $SQLRow['prix'],
-                                 $SQLRow['numIsbn'], $SQLRow['resume'], $SQLRow['avis']);
+            $unLivre = new Livre($SQLRow['couverture'], $SQLRow['titre'], getEditeurById($SQLRow['id_editeur']), getFormatById($SQLRow['id_format']), 
+                                getGenreById($SQLRow['id_genre']), $SQLRow['nbPages'], date_create($SQLRow['dateParution']), getLangueById($SQLRow['id_langue']),
+                                $SQLRow['prix'], $SQLRow['numIsbn'], $SQLRow['resume'], $SQLRow['avis']);
                     //   new Auteur($SQLRow['nom'], $SQLRow['prenom']);
-                       new Editeur($SQLRow['libelle']);
-                       new Genre($SQLRow['libelle']);
-                       new Format($SQLRow['libelle']);
-                       new Langue($SQLRow['libelle']);
-            $unLivre->setId($SQLRow['id']);
+            $unLivre->setId($SQLRow['id_livre']);
+            
+            $listeLivres[] = $unLivre;
         }
         
         $SQLStmt->closeCursor();
         return $listeLivres;
     }
     
-    function getUnLivre($idLivre){
+    function getLivreById($id_Livre){
         $conn = getConnexion();
         
-        $SQLQuery = "SELECT * FROM Livre WHERE id = :id";
+        $SQLQuery = "SELECT * FROM Livre WHERE id_livre = :id_livre";
         
         $SQLStmt = $conn->prepare($SQLQuery);
-        $SQLStmt->bindvalue(':id', $idLivre, PDO::PARAM_INT);
+        $SQLStmt->bindvalue(':id_livre', $idLivre, PDO::PARAM_INT);
         $SQLStmt->execute();
         
         $SQLRow = $SQLStmt->fetch(PDO::FETCH_ASSOC);
-        $unLivre = new Livre($SQLRow['couverture'], $SQLRow['titre'], $SQLRow['nbPages'], date_create($SQLRow['dateParution']), $SQLRow['prix'], $SQLRow['resume'], $SQLRow['avis']);
-                   //   new Auteur($SQLRow['nom'], $SQLRow['prenom']);
-                   new Editeur($SQLRow['libelle']);
-                   new Genre($SQLRow['libelle']);
-                   new Format($SQLRow['libelle']);
-                   new Langue($SQLRow['libelle']);
-            $unLivre->setId($SQLRow['id']);
+        $unLivre = new Livre($SQLRow['couverture'], $SQLRow['titre'], getEditeurById($SQLRow['id_editeur']), getFormatById($_POST['chFormat']), 
+                                getGenreById($_POST['chGenre']), $SQLRow['nbPages'], date_create($SQLRow['dateParution']), getLangueById($SQLRow['chLangue']),
+                                $SQLRow['prix'], $SQLRow['numIsbn'], $SQLRow['resume'], $SQLRow['avis']);
                    
-        $unLivre->setId($SQLRow['id']);
+        $unLivre->setId($SQLRow['id_livre']);
         
         $SQLStmt->closeCursor();
         return $unLivre;
