@@ -23,7 +23,7 @@
     function checkUser(string $pseudo, string $mdp) : bool{
         $conn = getConnexion();
         
-        $SQLQuery = "SELECT Count(id) as existe FROM Utilisateurs WHERE pseudo = :pseudo AND mdp = :password";
+        $SQLQuery = "SELECT pseudo, password FROM Utilisateurs WHERE pseudo = :pseudo AND mdp = :password";
         
         $SQLStmt = $conn->prepare($SQLQuery);
         $SQLStmt->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
@@ -72,3 +72,67 @@
     //     $SQLStmt->closeCursor();
     //     return $user;
     // }
+    
+    function deleteUser(int $id_user) : bool{
+        $conn = getConnexion();
+        
+        $SQLQuery = "DELETE FROM Choisir WHERE id_user = :id_user";
+        $SQLStmt = $conn->prepare($SQLQuery);
+        $SQLStmt->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+        
+            if($SQLStmt->execute()){
+                
+                $SQLQuery = "DELETE FROM Lus WHERE id_user = :id_user";
+                $SQLStmt = $conn->prepare($SQLQuery);
+                $SQLStmt->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+                
+                    if($SQLStmt->execute()){
+                        
+                        $SQLQuery = "DELETE FROM Noter WHERE id_user = :id_user";
+                        $SQLStmt = $conn->prepare($SQLQuery);
+                        $SQLStmt->bindValue(':id_user', $id_user, PDO::PARAM_INT); 
+                        
+                            if($SQLStmt->execute()){
+                                 
+                                $SQLQuery = "DELETE FROM Favoris WHERE id_user = :id_user";
+                                $SQLStmt = $conn->prepare($SQLQuery);
+                                $SQLStmt->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+                                
+                                    if($SQLStmt->execute()){
+                                        
+                                        $SQLQuery = "DELETE FROM Commenter WHERE id_user = :id_user";
+                                        $SQLStmt = $conn->prepare($SQLQuery);
+                                        $SQLStmt->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+                                        
+                                            if($SQLStmt->execute()){
+                                                
+                                                $SQLQuery = "DELETE FROM genre_favoris WHERE id_user = :id_user";
+                                                $SQLStmt = $conn->prepare($SQLQuery);
+                                                $SQLStmt->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+                                                
+                                                    if($SQLStmt->execute()){
+                                                        
+                                                        $SQLQuery = "DELETE FROM Acceder WHERE id_user = :id_user";
+                                                        $SQLStmt = $conn->prepare($SQLQuery);
+                                                        $SQLStmt->bindValue(':id_user', $id_user, PDO::PARAM_INT);
+                                                        
+                                                            if($SQLStmt->execute()){
+                                                                
+                                                                $SQLQuery = "DELETE FROM Utilisateurs WHERE id_user = :id_user";
+                                                                $SQLStmt = $conn->prepare($SQLQuery);
+                                                                $SQLStmt->bindValue(':id_user', $id_user, PDO::PARAM_INT); 
+                                                                
+                                                                $retVal = $SQLStmt->execute();
+
+                                                                return $retVal; 
+                                                            }
+                                                            else{
+                                                                return false;
+                                                            }
+                                                    }    
+                                            }
+                                    }
+                             }
+                    }
+            }
+    }

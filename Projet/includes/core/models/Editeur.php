@@ -4,7 +4,7 @@
         private int $id_editeur;
         private string $nom;
         
-        public function __construct(string $nom){
+        public function __construct(string $nom = ''){
             $this->nom = $nom;
             $this->id = 0;
         }

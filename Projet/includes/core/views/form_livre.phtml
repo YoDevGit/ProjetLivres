@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="public/styles/style.css" type="text/css"/>
-    <title>Ajouter un livre</title>
+    <title>Ajout / Edition livre</title>
 </head>
 <body>
     <header>
@@ -18,10 +18,9 @@
             <?php require_once "includes/partials/navbar.phtml"; ?>
         </nav>
     </header>
-    <main class="flex align-center">
-        
+    <main class='flex aliCen'>
         <!--Formulaire d'ajout d'un nouveau livre-->
-        <div class="form_livre flex align">
+        <div class="form_livre flex aliCen">
             <form class="form_content flex" action="" method="post" enctype ="multipart/form-data">
                 <!--Couverture-->
                 <div class="champs">
@@ -37,7 +36,7 @@
                 <!--Edition-->
                 <div class="champs">
                     <label for="">Édition : </label>
-                    <input list="editeurs" name="chEdition" id="champEdition"/>
+                    <input list="editeurs" name="chEdition" id="champEdition" value="<?= $unLivre->getEditeur()->getNom() ?>"/>
                     <datalist id="editeurs">
                         <?php
                             foreach($lesEditeurs as $editeur){
@@ -50,7 +49,7 @@
                 <!--Genre-->
                 <div class="champs">
                     <label for="">Genre : </label>
-                    <input list="genres" name="chGenre" id="champGenre" pattern="<?= $patternGenres ?>"/>
+                    <input list="genres" name="chGenre" id="champGenre" pattern="<?= $patternGenres ?>" value="<?= $unLivre->getGenre()->getLibelle() ?>"/>
                     <datalist id="genres">
                         <?php
                             foreach($lesGenres as $genre){
@@ -63,7 +62,7 @@
                 <!--Format-->
                 <div class="champs">
                     <label for="">Format : </label>
-                    <input list="formats" name="chFormat" id="champFormat" pattern = "<?= $patternFormats ?>"/>
+                    <input list="formats" name="chFormat" id="champFormat" pattern = "<?= $patternFormats ?>" value="<?= $unLivre->getFormat()->getLibelle() ?>"/>
                     <datalist id="formats">
                         <?php
                             foreach($listeFormats as $format){
@@ -80,7 +79,7 @@
                 <!--Date Parution-->
                 <div class="champs">
                     <label for="">Date de parution : </label>
-                    <input type="date" name="chDateParution" id="champDateParution" value="<?= $unLivre->getDateParution() ?>"/>
+                    <input type="date" name="chDateParution" id="champDateParution" value="<?= $unLivre->getDateParution()->format('Y-m-d') ?>"/>
                 </div>
                 <!--Prix-->
                  <div class="champs">
@@ -95,7 +94,7 @@
                 <!--Langue-->
                 <div class="champs">
                     <label for="">Langue : </label>
-                    <select name="chLangue" id="champLangue">
+                    <select name="chLangue" id="champLangue" value="<?= $unLivre->getLangue()->getLibelle() ?>">
                         <option value="0">--Sélectionner--</option>
                             <?php
                                 foreach($lesLangues as $langue){
@@ -110,15 +109,18 @@
                     <textarea name="chResume" id="champResume" value="<?= $unLivre->getResume() ?>"></textarea>
                 </div>
                 <!--Avis-->
-                <div class="champs flex align-center">
+                <div class="champs flex aliCen">
                     <label for="">Avis : </label>
-                    <textarea name="chAvis" id="champAvis" value=""></textarea>
+                    <textarea name="chAvis" id="champAvis" value="<?= $unLivre->getAvis() ?>"></textarea>
                 </div>
             
                 <input type="submit" value="Submit"/>
             </form>
         </div>
     </main>
+    <footer>
+        <?php require_once "includes/partials/footer.phtml"; ?>
+    </footer>
 </body>
 </html>
 

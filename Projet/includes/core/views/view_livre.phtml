@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="public/styles/style.css" type="text/css"/>
+    <title>Document</title>
+</head>
+<body>
+     <nav>
+        <?php require_once "includes/partials/navbar.phtml"; ?>
+    </nav>
+    <main class="flex aliCen">
+        <div class="card_livre">
+            <div class="card_content flex flexCol aliCen">
+                    <img class ="couverture" src="<?= $livre->getCouverture() ?>" alt="<?= $livre->getTitre() ?>"/>
+                    <div class='livre_infos flex flexCol aliCen'>
+                        <span><?= $livre->getTitre() ?></span>
+                        <span><?= $livre->getEditeur()->getNom() ?></span>
+                        <span><?= $livre->getGenre()->getLibelle() ?></span>
+                        <span><?= $livre->getFormat()->getLibelle() ?></span>
+                        <span><?= $livre->getNbPages() ?></span>
+                        <span><?= $livre->getDateParution()->format('d/m/Y') ?></span>
+                        <span><?= $livre->getPrix() ?></span>
+                        <span><?= $livre->getLangue()->getLibelle() ?></span>
+                    </div>
+    
+            </div>
+        </div>
+    </main>
+    <footer>
+        <?php require_once "includes/partials/footer.phtml"; ?>
+    </footer>
+</body>
+</html>

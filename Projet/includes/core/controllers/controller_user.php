@@ -32,6 +32,18 @@
             
         //     break;
         // }
+        case 'delete' :{
+            $id_user = $_GET['id'] ?? 0;
+            
+            if(deleteLivre($id_user)){
+                $message = "Suppression confirmée";
+                header('Location: ?page=user&action=list');
+            }
+            else{
+                $message = "Erreur de suppression";
+            }
+            break;
+        }
         default : {
             
         }

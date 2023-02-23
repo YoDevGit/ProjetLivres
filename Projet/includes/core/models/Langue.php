@@ -4,7 +4,7 @@
         private int $id_langue;
         private string $libelle;
         
-        public function __construct(string $libelle){
+        public function __construct(string $libelle = ''){
             $this->libelle = $libelle;
             $this->id = 0;
         }

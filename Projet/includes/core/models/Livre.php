@@ -8,7 +8,7 @@
     require_once 'Pal.php';
 
     class Livre{
-        private int $id, $nbPages, $prix, $numIsbn;
+        private int $id_livre, $nbPages, $prix, $numIsbn;
         private string $titre, $couverture, $resume, $avis;
         private ?DateTime $dateParution;
         private ?Editeur $editeur;
@@ -20,12 +20,12 @@
             ?Genre $genre = null, int $nbPages = 0, ?DateTime $dateParution = null, ?Langue $langue = null, int $prix = 0, int $numIsbn = 0, string $resume = "", string $avis = ""){
             $this->titre = $titre;
             $this->couverture = $couverture;
-            $this->editeur = $editeur;
+            $this->editeur = $editeur ?? new Editeur();
             $this->nbPages = $nbPages;
-            $this->genre = $genre;
-            $this->format = $format;
-            $this->dateParution = $dateParution;
-            $this->langue = $langue;
+            $this->genre = $genre ?? new Genre();
+            $this->format = $format ?? new Format();
+            $this->dateParution = $dateParution ?? new DateTime('now');
+            $this->langue = $langue ?? new Langue();
             $this->prix = $prix;
             $this->numIsbn = $numIsbn;
             $this->resume = $resume;
@@ -37,8 +37,8 @@
         public function getId(): int{
             return $this->id;
         }
-        public function setId(int $id): void{
-            $this->id = $id;
+        public function setId(int $id_livre): void{
+            $this->id = $id_livre;
         }
         //Titre
         public function getTitre(): string{
@@ -65,21 +65,21 @@
         public function getEditeur(): ?Editeur{
             return $this->editeur;
         }
-        public function setEditeur(string $editeur): void{
+        public function setEditeur(Editeur $editeur): void{
             $this->editeur = $editeur;
         }
         //Genre
         public function getGenre(): ?Genre{
             return $this->genre;
         }
-        public function setGenre(string $genre): void{
+        public function setGenre(Genre $genre): void{
             $this->genre = $genre;
         }
         //Format
         public function getFormat(): ?Format{
             return $this->format;
         }
-        public function setFormat(string $format): void{
+        public function setFormat(Format $format): void{
             $this->format = $format;
         }
         //Nombre pages
@@ -100,7 +100,7 @@
         public function getLangue(): ?Langue{
             return $this->langue;
         }
-        public function setLangue(string $langue): void{
+        public function setLangue(Langue $langue): void{
             $this->langue = $langue;
         }
         //Prix

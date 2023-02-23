@@ -31,7 +31,6 @@
         $SQLStmt->execute();
         
         $SQLRow = $SQLStmt->fetch(PDO::FETCH_ASSOC);
-        var_dump($id_editeur);
         $unEditeur = new Editeur($SQLRow['nom']);
         $unEditeur->setId($SQLRow['id_editeur']);
         

@@ -6,16 +6,17 @@
     <title>Liste des livres</title>
 </head>
 <body>
+     <nav>
+        <?php require_once "includes/partials/navbar.phtml"; ?>
+    </nav>
     <main>
-        <nav>
-            <?php require_once "includes/partials/navbar.phtml"; ?>
-        </nav>
         <header>
-            <h1>Titre de ma page d'accueil</h1>
+            <h1 class="listLivres">Liste des livres enregistrés</h1>
         </header>
-        <a href="index.php?page=livre&action=add">Ajouter un livre</a>
-        <table>
+        <a class='ajoutLivre' href="index.php?page=livre&action=add">Ajouter un livre</a>
+        <table class="bookTable">
             <thead>
+                <th class="th">Couverture</th>
                 <th class="th">Titre</th>
                 <th class="th">Editeur</th>
                 <th class="th">Genre</th>
@@ -31,6 +32,7 @@
                     foreach($livres as $livre){
                         $script= " ";
                         $script.= '<tr>';
+                        $script.= '<td class="td"><a href=" ?page=livre&action=view&id='.$livre->getId().'"><img class ="couverture" src="'.$livre->getCouverture().'" alt="'.$livre->getTitre().'"</a></td>';
                         $script.= '<td class="td">'.$livre->getTitre().'</td>';
                         $script.= '<td class="td">'.$livre->getEditeur()->getNom().'</td>';
                         $script.= '<td class="td">'.$livre->getGenre()->getLibelle().'</td>';
@@ -48,9 +50,9 @@
                 ?>
             </tbody>
         </table>
-        <footer>
-            <?php require_once "includes/partials/footer.phtml"; ?>
-        </footer>
     </main>
+    <footer>
+        <?php require_once "includes/partials/footer.phtml"; ?>
+    </footer>
 </body>
 </html>
